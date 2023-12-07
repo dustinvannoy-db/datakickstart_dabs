@@ -11,7 +11,7 @@ bundle:
 #     default: https://adb-3047470986259934.14.azuredatabricks.net
 
 workspace:
-  host: https://adb-3047470986259934.14.azuredatabricks.net
+  host: https://e2-dogfood.staging.cloud.databricks.com/
 
 include:
   - resources/*.yml
