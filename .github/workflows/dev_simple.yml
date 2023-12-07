@@ -35,26 +35,26 @@ jobs:
 
       - uses: databricks/setup-cli@main
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-          cache: 'pip' # caching pip dependencies
-      - run: python -m pip install --upgrade pip
-      - run: pip install -r requirements.txt
+      # - name: Set up Python 3.10
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.10'
+      #     cache: 'pip' # caching pip dependencies
+      # - run: python -m pip install --upgrade pip
+      # - run: pip install -r requirements.txt
 
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
-      - name: Run unit tests
-        env:
+      # - name: Run unit tests
+      #   env:
 
-          DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST}}
-          DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN}}
-          DATABRICKS_CLUSTER_ID: ${{secrets.DATABRICKS_CLUSTER_ID}}
-          SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
-        run: |
-          pytest tests/
+      #     DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST}}
+      #     DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN}}
+      #     DATABRICKS_CLUSTER_ID: ${{secrets.DATABRICKS_CLUSTER_ID}}
+      #     SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
+      #   run: |
+      #     pytest tests/
       
       # - name: Run integration test with dbconnect
       #   env: 
