@@ -47,12 +47,12 @@ jobs:
       #              run test suite
       #----------------------------------------------
       - name: Run unit tests
+        env: 
+          DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST}}
+          DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN}}
+          DATABRICKS_CLUSTER_ID: ${{secrets.DATABRICKS_CLUSTER_ID}}
         run: |
-          pytest tests/ -m "not integration"
-          env: 
-            DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST}}
-            DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN}}
-            DATABRICKS_CLUSTER_ID: ${{secrets.DATABRICKS_CLUSTER_ID}}
+          pytest tests/
       
       # - name: Run integration test with dbconnect
       #   env: 
