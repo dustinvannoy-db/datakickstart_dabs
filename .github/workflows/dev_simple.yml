@@ -52,7 +52,6 @@ jobs:
           DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST}}
           DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN}}
           DATABRICKS_CLUSTER_ID: ${{secrets.DATABRICKS_CLUSTER_ID}}
-          SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
         run: |
           pytest tests/
       
