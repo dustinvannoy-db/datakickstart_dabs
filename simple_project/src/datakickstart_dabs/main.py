@@ -6,7 +6,7 @@ def get_taxis():
   return spark.read.table("samples.nyctaxi.trips")
 
 def main():
-  get_taxis().show(5)
+  get_taxis().show(10)
 
 if __name__ == '__main__':
   main()

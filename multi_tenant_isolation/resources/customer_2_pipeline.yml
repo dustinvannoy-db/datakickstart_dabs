@@ -1,7 +1,7 @@
 resources:
   pipelines:
     customer_2_pipeline:
-      name: customer_2_pipeline_${bundle.target}
+      name: dab_customer_2_pipeline_${bundle.target}
       target: multi_tenant_bundle_${bundle.target}
       libraries:
         - notebook:
