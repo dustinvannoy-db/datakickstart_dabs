@@ -1,7 +1,22 @@
-def save_summary(df):
-  df.selectExpr("cast(tpep_pickup_datetime as date) pickup_date", 
-                "pickup_zip", "sum(trip_distance) total_distance", 
-                "sum(fare_amount) total_amount"
-              ).groupBy("pickup_date", "pickup_zip")
-  df.mode("overwrite").saveAsTable("main.dustinvannoy_dev.trip_summary")
+import pyspark.sql.functions as fn
 
+def save_summary(df):
+  df2 = df.select(
+        df.tpep_pickup_datetime.cast("date").alias("pickup_date"), 
+        df.pickup_zip, 
+        df.trip_distance,
+        df.fare_amount
+        )
+  df2.createOrReplaceTempView("trip_tmp")
+
+  df_agg = spark.sql("""
+          SELECT 
+            pickup_date, 
+            pickup_zip, 
+            SUM(trip_distance) as trip_distance, 
+            SUM(fare_amount) as fare_amount
+          FROM trip_tmp
+          GROUP BY pickup_date, pickup_zip
+        """)
+        
+  df_agg.write.mode("overwrite").saveAsTable("main.dustinvannoy_dev.trip_summary")
