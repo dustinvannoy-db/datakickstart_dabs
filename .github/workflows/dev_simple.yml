@@ -85,6 +85,7 @@ jobs:
         name: Run pipeline update
         run: |
           set -o pipefail
+          databricks bundle run notebook_validation_job --refresh-all 2>&1 | tee output.log
           databricks bundle run datakickstart_dabs_job --refresh-all 2>&1 | tee output.log
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}

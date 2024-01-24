@@ -12,8 +12,6 @@ resources:
           job_cluster_key: job_cluster
           notebook_task:
             notebook_path: ../src/notebook.ipynb
-          libraries:
-            - whl: ../dist/*.whl
           max_retries: 0
         
         - task_key: validation_task
