@@ -1,5 +1,3 @@
-from pyspark.sql import SparkSession
-
 def save_summary(df):
   df.selectExpr("cast(tpep_pickup_datetime as date) pickup_date", 
                 "pickup_zip", "sum(trip_distance) total_distance", 
