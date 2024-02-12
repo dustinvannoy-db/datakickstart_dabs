@@ -167,7 +167,7 @@ assertDataFrameEqual(clean_df, expected_df)
 
 # COMMAND ----------
 
-run_pytest("tests/pyspark_native/test_df_equality.py")
+run_pytest("tests/pyspark_native/test_pyspark_df_equality.py")
 
 # COMMAND ----------
 
@@ -267,7 +267,7 @@ assertSchemaEqual(df1.schema, df2.schema)
 
 # COMMAND ----------
 
-run_pytest("tests/pyspark_native/test_schema_equality.py")
+run_pytest("tests/pyspark_native/test_pyspark_schema_equality.py")
 
 # COMMAND ----------
 
