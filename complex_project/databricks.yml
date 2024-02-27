@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=bundle_config_schema.json
+
+# This is a Databricks asset bundle definition for datakickstart_dabs.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: dabs_example_proj
+
+workspace:
+  host: https://e2-dogfood.staging.cloud.databricks.com/
+
+include:
+  - resources/*.yml
+
+variables:
+  # libraries_path:
+  #   description: Path to dependencies (whl, jar, etc).
+  #   default: /libraries
+  cluster_spark_version:
+    default: "13.3.x-scala2.12"
+  cluster_node_type:
+    default: "m6gd.xlarge"
+
+targets:
+  # The 'dev' target, used for development purposes.
+  # Whenever a developer deploys using 'dev', they get their own copy.
+  dev:
+    mode: development
+    default: true
+  
+  staging:
+    mode: production
+    workspace:
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+    run_as:
+      user_name: dustin.vannoy@databricks.com
+    variables:
+      cluster_spark_version: "14.3.x-scala2.12"
+      cluster_node_type: "i4i.xlarge"
+
+  # The 'prod' target, used for production deployment.
+  prod:
+    mode: production
+    workspace:
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+    run_as:
+      user_name: dustin.vannoy@databricks.com
+    variables:
+      cluster_spark_version: "14.3.x-scala2.12"
+      cluster_node_type: "i3.2xlarge"
