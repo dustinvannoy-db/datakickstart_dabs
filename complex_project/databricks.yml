@@ -3,7 +3,7 @@
 # This is a Databricks asset bundle definition for datakickstart_dabs.
 # See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
 bundle:
-  name: datakickstart_dabs
+  name: dabs_example_proj
 
 workspace:
   host: https://e2-dogfood.staging.cloud.databricks.com/
@@ -11,32 +11,39 @@ workspace:
 include:
   - resources/*.yml
 
+variables:
+  # libraries_path:
+  #   description: Path to dependencies (whl, jar, etc).
+  #   default: /libraries
+  cluster_spark_version:
+    default: "13.3.x-scala2.12"
+  cluster_node_type:
+    default: "m6gd.xlarge"
+
 targets:
   # The 'dev' target, used for development purposes.
   # Whenever a developer deploys using 'dev', they get their own copy.
   dev:
-    # We use 'mode: development' to make sure everything deployed to this target gets a prefix
-    # like '[dev my_user_name]'. Setting this mode also disables any schedules and
-    # automatic triggers for jobs and enables the 'development' mode for Delta Live Tables pipelines.
     mode: development
     default: true
-
+  
   staging:
     mode: production
     workspace:
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
       user_name: dustin.vannoy@databricks.com
+    variables:
+      cluster_spark_version: "14.3.x-scala2.12"
+      cluster_node_type: "i4i.xlarge"
 
   # The 'prod' target, used for production deployment.
   prod:
-    # For production deployments, we only have a single copy, so we override the
-    # workspace.root_path default of
-    # /Users/${workspace.current_user.userName}/.bundle/${bundle.target}/${bundle.name}
-    # to a path that is not specific to the current user.
     mode: production
     workspace:
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
       user_name: dustin.vannoy@databricks.com
-
+    variables:
+      cluster_spark_version: "14.3.x-scala2.12"
+      cluster_node_type: "i3.2xlarge"
