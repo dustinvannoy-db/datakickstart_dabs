@@ -11,7 +11,7 @@ definitions:
 resources:
   jobs:
     job1:
-      name: dabs_job_${bundle.target}
+      name: complex_proj_job1_${bundle.target}
       tasks:
         - task_key: notebook_task
           job_cluster_key: my_job_cluster
@@ -29,7 +29,7 @@ resources:
       job_clusters: *mycluster
     
     job2:
-      name: dabs_job2_${bundle.target}
+      name: complex_proj_job2_${bundle.target}
       tasks:
         - task_key: job2_task
           job_cluster_key: my_job_cluster
