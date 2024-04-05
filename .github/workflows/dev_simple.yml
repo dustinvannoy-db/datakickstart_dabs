@@ -17,7 +17,7 @@ on:
 
   push:
     branches:
-      - db-demo
+      - complex-project
     paths:
       - "**/*.yml"
       - "**/*.py"
