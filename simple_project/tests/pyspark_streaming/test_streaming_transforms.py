@@ -10,13 +10,13 @@ import os
 import sys
 import shutil
 
-# currentdir = os.path.dirname(__file__)
-# parentdir = os.path.dirname(currentdir)
-# parent_parent_dir =  os.path.dirname(parentdir)
-# print(parent_parent_dir)
-# sys.path.insert(0,parent_parent_dir)
+currentdir = os.path.dirname(__file__)
+parentdir = os.path.dirname(currentdir)
+parent_parent_dir =  os.path.dirname(parentdir)
+print(parent_parent_dir)
+sys.path.insert(0,parent_parent_dir)
 
-from simple_project.src.datakickstart_dabs.streaming_functions import read_autoloader, delay_type_transform
+from src.datakickstart_dabs.streaming_functions import read_autoloader, delay_type_transform
 
 QUERY_NAME = "streaming_unit_test"
 
