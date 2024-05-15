@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+# from databricks.connect.session import SparkSession
 
 def get_taxis():
   print("Reading taxi trips data")
