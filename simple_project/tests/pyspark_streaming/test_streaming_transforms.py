@@ -77,25 +77,25 @@ def write_to_memory(df, query_name):
   return query
 
 
-# def test_read_autoloader_several_batches():
-#   setup()
-#   spark = get_spark()
+def test_read_autoloader_several_batches():
+  setup()
+  spark = get_spark()
 
-#   # start test stream
-#   streaming_df = read_autoloader(spark, SOURCE_PATH, CHECKPOINT_LOCATION+"/1")
-#   query = write_to_memory(streaming_df, QUERY_NAME)
+  # start test stream
+  streaming_df = read_autoloader(spark, SOURCE_PATH, CHECKPOINT_LOCATION+"/1")
+  query = write_to_memory(streaming_df, QUERY_NAME)
 
-#   assert spark.table(QUERY_NAME).count() == 0, "Empty streaming DataFrame expected to start"
+  assert spark.table(QUERY_NAME).count() == 0, "Empty streaming DataFrame expected to start"
 
-#   write_source_batch("part1", text1)
-#   time.sleep(30)
-#   assert spark.table(QUERY_NAME).count() == 2, "Expected 2 records after first batch"
+  write_source_batch("part1", text1)
+  time.sleep(30)
+  assert spark.table(QUERY_NAME).count() == 2, "Expected 2 records after first batch"
 
-#   write_source_batch("part2", text2)
-#   time.sleep(30)
-#   assert spark.table(QUERY_NAME).count() == 4, "Expected 4 records after second batch"
+  write_source_batch("part2", text2)
+  time.sleep(30)
+  assert spark.table(QUERY_NAME).count() == 4, "Expected 4 records after second batch"
 
-#   query.stop()
+  query.stop()
 
 # def test_delay_type_valid():
 #   spark = get_spark()

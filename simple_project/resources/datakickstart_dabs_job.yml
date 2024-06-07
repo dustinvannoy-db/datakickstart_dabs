@@ -8,10 +8,6 @@ resources:
         quartz_cron_expression: '0 30 19 * * ?'
         timezone_id: America/Los_Angeles
 
-      email_notifications:
-        on_failure:
-          - training@dustinvannoy.com
-
       tasks:
         - task_key: notebook_task
           job_cluster_key: job_cluster
@@ -28,7 +24,7 @@ resources:
           pipeline_task:
             pipeline_id: ${resources.pipelines.datakickstart_dabs_pipeline.id}
           max_retries: 0
-        
+
         - task_key: main_task
           depends_on:
             - task_key: refresh_pipeline
@@ -48,4 +44,3 @@ resources:
             autoscale:
                 min_workers: 1
                 max_workers: 2
-

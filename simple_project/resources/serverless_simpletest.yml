@@ -1,0 +1,14 @@
+resources:
+  jobs:
+    Serverless_Notebook_ShortTest:
+      name: Serverless_Notebook_ShortTest_${bundle.target}
+      schedule:
+        quartz_cron_expression: 34 0 10 * * ?
+        timezone_id: America/Los_Angeles
+        pause_status: UNPAUSED
+      max_concurrent_runs: 3
+      tasks:
+        - task_key: Serverless_Notebook_test
+          notebook_task:
+            notebook_path: /Users/dustin.vannoy@databricks.com/Serverless_Notebook_test
+            source: WORKSPACE
