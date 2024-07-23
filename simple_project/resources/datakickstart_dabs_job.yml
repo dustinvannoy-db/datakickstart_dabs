@@ -44,3 +44,7 @@ resources:
             autoscale:
                 min_workers: 1
                 max_workers: 2
+
+#       permissions:
+#         - level: IS_OWNER
+#           user_name: dustin.vannoy@databricks.com

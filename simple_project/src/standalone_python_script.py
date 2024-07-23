@@ -36,14 +36,14 @@ def save_summary(df):
 
 global spark
 spark = get_spark()
-print("Running on cluster: ", dbutils._cluster_id)
+# print("Running on cluster: ", dbutils._cluster_id)
 
 df = get_taxis()
 save_summary(df)
 
 #-----MISC COMMANDS -----#
-is_databricks = True if os.getenv("DATABRICKS_RUNTIME_VERSION") is not None else False
-print(is_databricks)
+# is_databricks = True if os.getenv("DATABRICKS_RUNTIME_VERSION") is not None else False
+# print(is_databricks)
 
-secret = dbutils.secrets.get(scope='fieldeng', key='dustin-secret')
-print(len(secret))
+# secret = dbutils.secrets.get(scope='fieldeng', key='dustin-secret')
+# print(len(secret))

@@ -3,7 +3,7 @@
 # This is a Databricks asset bundle definition for datakickstart_dabs.
 # See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
 bundle:
-  name: datakickstart_dabs
+  name: datakickstart_dabs_simple
 
 workspace:
   host: https://e2-dogfood.staging.cloud.databricks.com/

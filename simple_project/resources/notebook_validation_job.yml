@@ -33,4 +33,8 @@ resources:
             node_type_id: m6gd.xlarge
             autoscale:
                 min_workers: 1
-                max_workers: 2
+                max_workers: 3
+      
+      permissions:
+        - level: IS_OWNER
+          user_name: dustin.vannoy@databricks.com
