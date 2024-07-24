@@ -3,12 +3,16 @@ resources:
     notebook_validation_job:
       name: notebook_validation_job_${bundle.target}
 
-      email_notifications:
-        on_complete:
-          - training@dustinvannoy.com
-
       tasks:
+        - task_key: setup_task
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/setup_notebook.ipynb
+          max_retries: 0
+        
         - task_key: notebook_task
+          depends_on:
+            - task_key: setup_task
           job_cluster_key: job_cluster
           notebook_task:
             notebook_path: ../src/notebook.ipynb
@@ -29,4 +33,8 @@ resources:
             node_type_id: m6gd.xlarge
             autoscale:
                 min_workers: 1
-                max_workers: 2
+                max_workers: 3
+      
+      permissions:
+        - level: IS_OWNER
+          user_name: dustin.vannoy@databricks.com

@@ -1,10 +1,9 @@
 from pyspark.sql import SparkSession
-# from databricks.connect.session import SparkSession
 
 def get_taxis():
   print("Reading taxi trips data")
   spark = SparkSession.builder.getOrCreate()
-  return spark.read.table("samples.nyctaxi.trips")
+  return spark.read.table("samples.nyctaxi.trips").drop("tpep_pickup_datetime")
 
 def main():
   get_taxis().show(10)

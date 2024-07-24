@@ -1,0 +1,17 @@
+# DLT pipeline
+resources:
+  pipelines:
+    datakickstart_dabs_pipeline:
+      name: datakickstart_dlt_with_wheel_${bundle.target}
+      target: datakickstart_dlt_with_wheel_${bundle.target}
+      libraries:
+        - notebook:
+            path: ../src/dlt_pipeline_uses_wheel.ipynb 
+      clusters:
+        - label: default
+          num_workers: 2
+          # libraries:
+          #   - whl: /Shared/code/datakickstart_dabs-0.0.1.whl     
+
+      configuration:
+        bundle.sourcePath: /Workspace/${workspace.file_path}/src
