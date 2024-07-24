@@ -1,4 +1,4 @@
-# DLT pipeline
+  # DLT pipeline
 resources:
   pipelines:
     datakickstart_dabs_pipeline:
@@ -15,3 +15,15 @@ resources:
 
       configuration:
         bundle.sourcePath: /Workspace/${workspace.file_path}/src
+
+  jobs:
+    datakickstart_dlt_job:
+      name: datakickstart_dlt_job_${bundle.target}
+      tasks:
+        - task_key: dlt_task
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.datakickstart_dabs_pipeline.id}
+          max_retries: 0
+          clusters:
+            - label: "default"
+              num_workers: 2
