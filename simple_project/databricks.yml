@@ -3,7 +3,10 @@
 # This is a Databricks asset bundle definition for datakickstart_dabs.
 # See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
 bundle:
-  name: datakickstart_dabs
+  name: datakickstart_dabs_simple
+
+workspace:
+  host: https://e2-dogfood.staging.cloud.databricks.com/
 
 include:
   - resources/*.yml
@@ -17,20 +20,13 @@ targets:
     # automatic triggers for jobs and enables the 'development' mode for Delta Live Tables pipelines.
     mode: development
     default: true
-    workspace:
-      host: https://adb-7923129632668114.14.azuredatabricks.net/
 
   staging:
-    # For staging deployments, we only have a single copy, so we override the
-    # workspace.root_path default of
-    # /Users/${workspace.current_user.userName}/.bundle/${bundle.target}/${bundle.name}
-    # to a path that is not specific to the current user.
     mode: production
     workspace:
-      host: https://adb-7923129632668114.14.azuredatabricks.net/
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
-      user_name: ${workspace.current_user.userName}
+      user_name: dustin.vannoy@databricks.com
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -40,10 +36,7 @@ targets:
     # to a path that is not specific to the current user.
     mode: production
     workspace:
-      host: https://adb-7923129632668114.14.azuredatabricks.net/
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
-      # This can run as a specific user or service principal in production.
-      # To run as service principal use service_principal_name (see Databricks documentation).
-      user_name: someuser@mydomain.com
+      user_name: dustin.vannoy@databricks.com
 

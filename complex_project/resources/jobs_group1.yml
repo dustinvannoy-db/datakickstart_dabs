@@ -6,7 +6,7 @@ definitions:
         node_type_id: ${var.cluster_node_type}
         autoscale:
             min_workers: 1
-            max_workers: 3
+            max_workers: 5
   tags_configuration: &tags_configuration
     group: "group1"
     product: "product1"

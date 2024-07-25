@@ -13,3 +13,7 @@ resources:
 
       configuration:
         bundle.sourcePath: /Workspace/${workspace.file_path}/src
+
+      # permissions:
+      #   - level: IS_OWNER
+      #     user_name: dustin.vannoy@databricks.com

@@ -7,7 +7,7 @@ on:
 
   push:
     branches:
-      - monorepo
+      - db-demo
     paths:
       - "**/*.yml"
       - "**/*.py"
@@ -34,10 +34,10 @@ jobs:
 
       - name: Run unit tests
         env:
-          SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
+          SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}
         run: |
           pytest tests/
-      
+
       - uses: databricks/setup-cli@main
 
       - run: databricks bundle deploy

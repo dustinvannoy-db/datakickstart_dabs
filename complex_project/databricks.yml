@@ -6,7 +6,7 @@ bundle:
   name: dabs_example_proj
 
 workspace:
-  host: https://adb-7923129632668114.14.azuredatabricks.net/
+  host: https://e2-dogfood.staging.cloud.databricks.com/
 
 include:
   - resources/*.yml
@@ -18,7 +18,7 @@ variables:
   cluster_spark_version:
     default: "13.3.x-scala2.12"
   cluster_node_type:
-    default: "Standard_DS3_v2"
+    default: "m6gd.xlarge"
 
 targets:
   # The 'dev' target, used for development purposes.
@@ -32,10 +32,10 @@ targets:
     workspace:
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
-      user_name: ${workspace.current_user.userName}
+      user_name: dustin.vannoy@databricks.com
     variables:
       cluster_spark_version: "14.3.x-scala2.12"
-      cluster_node_type: "Standard_E8d_v4"
+      cluster_node_type: "i4i.xlarge"
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -43,7 +43,7 @@ targets:
     workspace:
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
-      user_name: fake@example.com
+      user_name: dustin.vannoy@databricks.com
     variables:
       cluster_spark_version: "14.3.x-scala2.12"
-      cluster_node_type: "Standard_E8d_v4"
+      cluster_node_type: "i3.2xlarge"

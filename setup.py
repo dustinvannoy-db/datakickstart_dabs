@@ -20,5 +20,5 @@ setup(
     packages=find_packages(where='./src'),
     package_dir={'': 'src'},
     entry_points={"entry_points": "main=datakickstart_dabs.main:main"},
-    install_requires=["setuptools"],
+    install_requires=["setuptools", "wheel"],
 )
