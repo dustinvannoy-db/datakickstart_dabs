@@ -5,9 +5,11 @@ spark = SparkSession.builder \
     .appName("Unity Catalog Example") \
     .getOrCreate()
 
+table = "main.dustinvannoy_dev.flights_raw"
+
 # Connect to Unity Catalog using catalog main
-spark.sql("""Select WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay, IsArrDelayed 
-from main.dustinvannoy_dev.flights_raw 
+spark.sql(f"""Select WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay, IsArrDelayed 
+from {table} 
 where WeatherDelay != 'NA' or NASDelay != 'NA' or SecurityDelay != 'NA' or LateAircraftDelay != 'NA'
 limit 20""").show()
 

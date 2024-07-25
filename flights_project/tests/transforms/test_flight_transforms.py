@@ -1,5 +1,13 @@
 import pytest
 from pyspark.testing.utils import assertDataFrameEqual, assertSchemaEqual 
+import os
+import sys
+
+currentdir = os.path.dirname(__file__)
+parentdir = os.path.dirname(currentdir)
+parent_parent_dir =  os.path.dirname(parentdir)
+print(parent_parent_dir)
+sys.path.insert(0,parent_parent_dir)
 
 from flights.transforms import flight_transforms
 

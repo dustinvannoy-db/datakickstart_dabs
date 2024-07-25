@@ -1,7 +1,7 @@
 # Databricks notebook source
 # COMMAND ----------
 dbutils.widgets.text("catalog", "main")
-dbutils.widgets.text("database", "datakickstart_dev")
+dbutils.widgets.text("database", "dustinvannoy_dev")
 # COMMAND ----------
 
 # MAGIC %md

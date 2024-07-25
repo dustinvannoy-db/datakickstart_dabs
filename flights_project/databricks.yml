@@ -12,7 +12,7 @@ variables:
   catalog:
     default: "main"
   database:
-    default: "datakickstart_dev"
+    default: "dustinvannoy_dev"
 
 targets:
   # The 'dev' target, used for development purposes.
