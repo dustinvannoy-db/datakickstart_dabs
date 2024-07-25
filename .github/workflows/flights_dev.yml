@@ -1,4 +1,4 @@
-name: Deploy to DEV
+name: Deploy flights to DEV
 
 concurrency: 1
 
