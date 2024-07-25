@@ -1,0 +1,43 @@
+resources:
+  jobs:
+    notebook_validation_job:
+      name: flights_notebook_validation_job_${bundle.target}
+
+      tasks:
+        - task_key: setup_task
+          existing_cluster_id: ${var.all_purpose_cluster_id}
+          notebook_task:
+            notebook_path: ../tests/integration/setup_notebook.ipynb
+          max_retries: 0
+        
+        - task_key: notebook_task
+          depends_on:
+            - task_key: setup_task
+          existing_cluster_id: ${var.all_purpose_cluster_id}
+          notebook_task:
+            notebook_path: ../flights_main_notebook.py
+            base_parameters:
+                catalog: ${var.catalog}
+                database: flights_test
+          max_retries: 0
+        
+        - task_key: validation_task
+          depends_on:
+            - task_key: notebook_task
+          existing_cluster_id: ${var.all_purpose_cluster_id}
+          notebook_task:
+            notebook_path: ../tests/integration/validation_notebook.ipynb
+          max_retries: 0
+
+      # job_clusters:
+      #   - job_cluster_key: job_cluster
+      #     new_cluster:
+      #       spark_version: 14.3.x-scala2.12
+      #       node_type_id: m6gd.xlarge
+      #       autoscale:
+      #           min_workers: 1
+      #           max_workers: 3
+      
+      permissions:
+        - level: IS_OWNER
+          user_name: dustin.vannoy@databricks.com

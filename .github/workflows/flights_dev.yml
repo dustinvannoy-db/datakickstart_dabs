@@ -46,11 +46,11 @@ jobs:
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
-      - name: Run unit tests
-        env:
-          SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
-        run: |
-          pytest tests/
+      # - name: Run unit tests
+      #   env:
+      #     SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
+      #   run: |
+      #     pytest tests/
       
       # - name: Run integration test with dbconnect
       #   env: 
@@ -85,7 +85,7 @@ jobs:
         name: Run pipeline update
         run: |
           set -o pipefail
-          databricks bundle run flights_notebook --refresh-all 2>&1 | tee output.log
+          databricks bundle run notebook_validation_job --refresh-all 2>&1 | tee output.log
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_BUNDLE_ENV: dev

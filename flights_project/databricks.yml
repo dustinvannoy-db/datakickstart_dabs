@@ -13,6 +13,8 @@ variables:
     default: "main"
   database:
     default: "dustinvannoy_dev"
+  all_purpose_cluster_id:
+    default: "0326-164201-qhvj1pwh"  #"0725-142209-7jvag949"
 
 targets:
   # The 'dev' target, used for development purposes.
@@ -25,6 +27,21 @@ targets:
     default: true
     workspace:
       host: https://e2-dogfood.staging.cloud.databricks.com/
+
+  test:
+    # For staging deployments, we only have a single copy, so we override the
+    # workspace.root_path default of
+    # /Users/${workspace.current_user.userName}/.bundle/${bundle.target}/${bundle.name}
+    # to a path that is not specific to the current user.
+    mode: production
+    workspace:
+      host: https://e2-demo-west.cloud.databricks.com/
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+    run_as:
+      user_name: ${workspace.current_user.userName}
+    variables:
+      all_purpose_cluster_id: "0725-142209-7jvag949"
+    
 
   staging:
     # For staging deployments, we only have a single copy, so we override the

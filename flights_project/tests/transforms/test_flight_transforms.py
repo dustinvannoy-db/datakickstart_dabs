@@ -14,12 +14,11 @@ from flights.transforms import flight_transforms
 @pytest.fixture(scope="module")
 def spark_session():
     try:
-        from databricks.connect import DatabricksSession
-        return DatabricksSession.builder.profile("unit_tests").getOrCreate()
-    except ValueError:
-        print("Profile `unit_tests` not found, trying default SparkSession getOrCreate")
         from pyspark.sql import SparkSession
         return SparkSession.builder.getOrCreate()
+    except ValueError:
+        from databricks.connect import DatabricksSession
+        return DatabricksSession.builder.profile("unit_tests").getOrCreate()    
     except ImportError:
         print("No Databricks Connect, build and return local SparkSession")
         from pyspark.sql import SparkSession

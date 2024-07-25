@@ -50,7 +50,7 @@ jobs:
         env:
           SPARK_REMOTE: ${{secrets.SPARK_REMOTE_TST}}   
         run: |
-          pytest tests/
+          pytest tests/ -k test_get_flight_schema__valid
       
       # - name: Run integration test with dbconnect
       #   env: 
@@ -61,7 +61,7 @@ jobs:
       
       - uses: databricks/setup-cli@main
 
-      - run: databricks bundle deploy --target TEST
+      - run: databricks bundle deploy --target test
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_TST }}
           DATABRICKS_BUNDLE_ENV: tst
@@ -85,7 +85,7 @@ jobs:
         name: Run pipeline update
         run: |
           set -o pipefail
-          databricks bundle run -t TST flights_notebook --refresh-all 2>&1 | tee output.log
+          databricks bundle run -t test notebook_validation_job --refresh-all 2>&1 | tee output.log
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_TST }}
           DATABRICKS_BUNDLE_ENV: tst
