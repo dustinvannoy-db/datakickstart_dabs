@@ -15,7 +15,7 @@ resources:
             - task_key: setup_task
           job_cluster_key: job_cluster
           notebook_task:
-            notebook_path: ../flights_main_notebook.ipynb
+            notebook_path: ../flights_main_notebook.py
             base_parameters:
                 catalog: ${var.catalog}
                 database: flights_test

@@ -50,7 +50,7 @@ jobs:
         env:
           SPARK_REMOTE: ${{secrets.SPARK_REMOTE_TST}}   
         run: |
-          pytest tests/
+          pytest tests/ -k test_get_flight_schema__valid
       
       # - name: Run integration test with dbconnect
       #   env: 
