@@ -1,6 +1,10 @@
 """Python functions to test
 These represent Python functions that you would keep in a Python file and import to test.
 """
+from pyspark.sql.functions import lit, input_file_name, current_timestamp, current_date
+
+def add_source_column(df)
+    return df.withColumn("source_system", lit("history"))
 
 def add_metadata_columns(df, include_time=True):
     if include_time:
