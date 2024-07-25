@@ -1,26 +1,26 @@
-name: Deploy to DEV
+name: Deploy flights_project to TEST
 
 concurrency: 1
 
 on:
   workflow_dispatch:
 
-  # pull_request:
-  #   types:
-  #     - opened
-  #     - synchronize
-  #   branches:
-  #     - main
-  #   paths:
-  #     - "**/*.yml"
-  #     - "**/*.py"
-
-  push:
+  pull_request:
+    types:
+      - opened
+      - synchronize
     branches:
-      - db-demo
+      - level_up
     paths:
       - "**/*.yml"
       - "**/*.py"
+
+  # push:
+  #   branches:
+  #     - flights_dev
+  #   paths:
+  #     - "**/*.yml"
+  #     - "**/*.py"
 
 jobs:
   deploy:
@@ -48,23 +48,23 @@ jobs:
       #----------------------------------------------
       - name: Run unit tests
         env:
-          SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
+          SPARK_REMOTE: ${{secrets.SPARK_REMOTE_TST}}   
         run: |
           pytest tests/
       
       # - name: Run integration test with dbconnect
       #   env: 
-      #     SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}
+      #     SPARK_REMOTE: ${{secrets.SPARK_REMOTE_TST}}
       #   run: |
       #     source .venv/bin/activate
       #     pytest tests/ -m "integration"
       
       - uses: databricks/setup-cli@main
 
-      - run: databricks bundle deploy
+      - run: databricks bundle deploy --target TEST
         env:
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: dev
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_TST }}
+          DATABRICKS_BUNDLE_ENV: tst
 
   pipeline_update:
     name: "Run pipeline update"
@@ -85,7 +85,7 @@ jobs:
         name: Run pipeline update
         run: |
           set -o pipefail
-          databricks bundle run flights_notebook --refresh-all 2>&1 | tee output.log
+          databricks bundle run -t TST flights_notebook --refresh-all 2>&1 | tee output.log
         env:
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: dev
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_TST }}
+          DATABRICKS_BUNDLE_ENV: tst
