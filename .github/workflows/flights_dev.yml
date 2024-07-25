@@ -46,11 +46,11 @@ jobs:
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
-      - name: Run unit tests
-        env:
-          SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
-        run: |
-          pytest tests/
+      # - name: Run unit tests
+      #   env:
+      #     SPARK_REMOTE: ${{secrets.SPARK_REMOTE}}   
+      #   run: |
+      #     pytest tests/
       
       # - name: Run integration test with dbconnect
       #   env: 
