@@ -13,6 +13,8 @@ variables:
     default: "main"
   database:
     default: "dustinvannoy_dev"
+  all_purpose_cluster_id:
+    default: "0326-164201-qhvj1pwh"  #"0725-142209-7jvag949"
 
 targets:
   # The 'dev' target, used for development purposes.
@@ -37,6 +39,9 @@ targets:
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     run_as:
       user_name: ${workspace.current_user.userName}
+    variables:
+      all_purpose_cluster_id: "0725-142209-7jvag949"
+    
 
   staging:
     # For staging deployments, we only have a single copy, so we override the
